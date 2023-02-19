@@ -1,6 +1,6 @@
 using System;
 
-namespace SalesWebCourse.Models {
+namespace SalesWebCourse.Models.ViewModels {
     public class ErrorViewModel {
         public string RequestId { get; set; }
 
