@@ -24,7 +24,8 @@ namespace SalesWebCourse {
             services.AddControllersWithViews();
 
     services.AddDbContext<SalesWebCourseContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("SalesWebCourseContext")));
+            options.UseMySql(Configuration.GetConnectionString("SalesWebCourseContext"), builder =>
+                    builder.MigrationsAssembly("SalesWebCourse")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
