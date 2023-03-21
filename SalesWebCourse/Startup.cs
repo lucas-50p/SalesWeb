@@ -23,15 +23,21 @@ namespace SalesWebCourse {
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllersWithViews();
 
-    services.AddDbContext<SalesWebCourseContext>(options =>
+        services.AddDbContext<SalesWebCourseContext>(options =>
             options.UseMySql(Configuration.GetConnectionString("SalesWebCourseContext"), builder =>
                     builder.MigrationsAssembly("SalesWebCourse")));
+
+            // Inicia o serviço na injeção de dependências
+            services.AddScoped<SeedingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedingService seedingService) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
+
+                // Popular a minha base de dados
+                seedingService.Seed();
             }
             else {
                 app.UseExceptionHandler("/Home/Error");
