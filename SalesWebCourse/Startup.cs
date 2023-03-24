@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesWebCourse.Data;
+using SalesWebCourse.Services;
 
 namespace SalesWebCourse {
     public class Startup {
@@ -29,6 +30,7 @@ namespace SalesWebCourse {
 
             // Inicia o serviço na injeção de dependências
             services.AddScoped<SeedingService>();
+            services.AddScoped<SellerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
