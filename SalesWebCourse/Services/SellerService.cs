@@ -19,5 +19,11 @@ namespace SalesWebCourse.Services {
             // Vai acessar fonte de dados da tabela e converte para lista
             return _context.Seller.ToList();
         }
+
+        // Incluir um novo vendedor no bancos de dados
+        public void Insert(Seller obj) {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
     }
 }
