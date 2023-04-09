@@ -12,6 +12,7 @@ namespace SalesWebCourse.Models {
         public DateTime BithDate { get; set; }
         public double BaseSalary { get; set; }
         public Department Department { get; set; }
+        public int DepartmentId { get; set; }// Garantir id não seja nulo, no banco de dados
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
 
         public Seller() { 
