@@ -22,9 +22,6 @@ namespace SalesWebCourse.Services {
 
         // Incluir um novo vendedor no bancos de dados
         public void Insert(Seller obj) {
-
-            //TODO
-            obj.Department = _context.Department.First();
             _context.Add(obj);
             _context.SaveChanges();
         }

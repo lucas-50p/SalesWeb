@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalesWebCourse.Services;
+using SalesWebCourse.Models.ViewModels;
 using SalesWebCourse.Models;
 
 namespace SalesWebCourse.Controllers {
     public class SellersController : Controller {
 
         private readonly SellerService _sellersService;
-        public SellersController(SellerService sellersService) {
+        private readonly DepartmentService _departmentService;
+
+        public SellersController(SellerService sellersService, DepartmentService departmentService) {
             _sellersService = sellersService;
+            _departmentService = departmentService;
         }
 
         public IActionResult Index() {
@@ -16,8 +20,11 @@ namespace SalesWebCourse.Controllers {
             return View(list);
         }
 
+        // Vai abrir o formulario para cadastrar o vendedor
         public IActionResult Create() {
-            return View();
+            var departments = _departmentService.FindAll();
+            var viewModel = new SellerFormViewModel { Departments = departments };
+            return View(viewModel);
         }
 
         // Ela vai receber vendedor que veio da requisição
