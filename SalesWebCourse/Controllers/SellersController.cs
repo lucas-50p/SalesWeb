@@ -31,8 +31,31 @@ namespace SalesWebCourse.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]//Seguraça
         public IActionResult Create(Seller seller) {
-           _sellersService.Insert(seller);
-           return RedirectToAction(nameof(Index));
+            _sellersService.Insert(seller);
+            return RedirectToAction(nameof(Index));
         }
+
+        // Delete confirmação, int? - opcional
+        public IActionResult Delete(int? id) {
+            //TODO
+            if (id == null) {
+                return NotFound();
+            }
+
+            // Busquei no BD
+            var obj = _sellersService.FindById(id.Value);
+            if (obj == null) {
+                return NotFound();
+            }
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]//Seguraça
+        public IActionResult Delete(int id) {
+            _sellersService.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
