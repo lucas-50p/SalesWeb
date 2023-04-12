@@ -57,5 +57,19 @@ namespace SalesWebCourse.Controllers {
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Details(int? id) {
+            //TODO
+            if (id == null) {
+                return NotFound();
+            }
+
+            // Busquei no BD
+            var obj = _sellersService.FindById(id.Value);
+            if (obj == null) {
+                return NotFound();
+            }
+            return View(obj);
+        }
+
     }
 }
