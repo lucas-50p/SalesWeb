@@ -19,6 +19,7 @@ namespace SalesWebCourse.Controllers {
         }
 
         public IActionResult Index() {
+           
             // Retorna lista de vendedores
             var list = _sellersService.FindAll();
             return View(list);
@@ -35,8 +36,15 @@ namespace SalesWebCourse.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]//Seguraça
         public IActionResult Create(Seller seller) {
+
+            // Esse modelo server para testar ele valido
+            if (!ModelState.IsValid) {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
             _sellersService.Insert(seller);
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
         }
 
         // Delete confirmação, int? - opcional
@@ -96,6 +104,12 @@ namespace SalesWebCourse.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]//Seguraça
         public IActionResult Edit(int id, Seller seller) {
+
+            if (!ModelState.IsValid) {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
 
             if (id != seller.Id) {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch"});

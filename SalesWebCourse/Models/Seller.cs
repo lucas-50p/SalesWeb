@@ -8,19 +8,29 @@ namespace SalesWebCourse.Models {
     public class Seller {
 
         public int Id { get; set; }
+
+        [Required (ErrorMessage ="{0} required")]// Campo obrigatorio, pega nome atributo
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "{0} size should be between {2} and {1}")]// Tamanho da string 
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]// Campo obrigatorio, pega nome atributo
+        [EmailAddress(ErrorMessage = "Enter a valid email")]
         [DataType(DataType.EmailAddress)]// cria link
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]// Campo obrigatorio, pega nome atributo
         [Display(Name="Birth Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime BithDate { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]// Campo obrigatorio, pega nome atributo
+        [Range(100.0, 5000.0, ErrorMessage = "{0} must be from {1} to {2}")]// minimo e maximo
         [Display(Name = "Base Salary")]
         [DisplayFormat(DataFormatString = "{0:F2}")]// Formata duas casas decimais
         public double BaseSalary { get; set; }
+
+        [Required(ErrorMessage = "{0} required")]// Campo obrigatorio, pega nome atributo
         public Department Department { get; set; }
         public int DepartmentId { get; set; }// Garantir id não seja nulo, no banco de dados
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
