@@ -30,7 +30,6 @@ namespace SalesWebCourse.Models {
         [DisplayFormat(DataFormatString = "{0:F2}")]// Formata duas casas decimais
         public double BaseSalary { get; set; }
 
-        [Required(ErrorMessage = "{0} required")]// Campo obrigatorio, pega nome atributo
         public Department Department { get; set; }
         public int DepartmentId { get; set; }// Garantir id não seja nulo, no banco de dados
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();

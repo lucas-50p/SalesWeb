@@ -2,6 +2,8 @@
 using SalesWebCourse.Models.ViewModels;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWebCourse.Services {
     public class DepartmentService {
@@ -14,8 +16,8 @@ namespace SalesWebCourse.Services {
         }
 
         // Retortar todos departamentos e ordenados
-        public List<Department> FindAll() {
-            return _context.Department.OrderBy(x=> x.Name).ToList();
+        public async Task<List<Department>> FindAllAsync() {
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync();
         }
     }
 }
